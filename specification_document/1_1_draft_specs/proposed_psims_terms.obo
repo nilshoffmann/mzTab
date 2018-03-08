@@ -1,3 +1,29 @@
+# Derivatization related terms
+[Term]
+id: MS:1XXXXXXX
+name: derivatization
+def: "The chemical modification of a (sample|assay|aliquot,...) prior to chromatography and / or MS application." [PSI:MS]
+is_a: MS:1000857 ! run attribute
+
+[Term]
+id: MS:1XXXXXXX
+name: derivatization compound
+def: "The chemical compound used for derivatization." [PSI:MS]
+is_a: MS:1000881 ! chemical compound
+relationship: part_of MS:1XXXXXXX ! derivatization
+
+[Term]
+id: MS:1XXXXXXX
+name: silylation
+def: "Silylation agent. May be further specified by adding chemical compound attributes." [PSI:MS]
+is_a: MS:1XXXXXXX ! derivatization compound
+
+[Term]
+id: MS:1XXXXXXX
+name: methoximation
+def: "Methoximation agent. May be further specified by adding chemical compound attributes." [PSI:MS]
+is_a: MS:1XXXXXXX ! derivatization compound
+
 # Proposed metabolite identification level system terms.
 
 # MSI levels
