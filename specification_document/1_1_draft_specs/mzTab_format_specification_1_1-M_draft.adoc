@@ -36,7 +36,7 @@ The latest draft version of this document may be found at https://github.com/HUP
 [[abstract]]
 == Abstract
 
-The Human Proteome Organisation (HUPO) Proteomics Standards Initiative (PSI) and Metabolomics Standards initiative (MSI) define community standards for data representation in proteomics/metabolomics to facilitate data comparison, exchange and verification. In this context, the two organizations are working together on a shared standard for downstream results, following mass spectrometry (MS) analysis. This document defines a tab delimited text file format to report metabolomics results, based on a shared core mzTab format, also used in proteomics contexts.
+The Human Proteome Organisation (HUPO) Proteomics Standards Initiative (PSI) and Metabolomics Standards initiative (MSI) define community standards for data representation in proteomics/metabolomics to facilitate data comparison, exchange and verification. In this context, the two organizations are working together on a shared standard for downstream results, following mass spectrometry (MS) analysis. This document defines a tab-delimited text file format to report metabolomics results, based on a shared core mzTab format, also used in proteomics contexts.
 
 //reenable section numbering
 :sectnums:
@@ -83,7 +83,7 @@ The following cases of usage have driven the development of the mzTab data model
 
 7. It should be useful as an output format by web-services that can then be readily accessed by tools supporting mzTab-M.
 
-8. It should be possible to directly link a given peptide / small molecule identification to its source spectrum in an external MS data file.
+8. It should be possible to directly link a small molecule record to its source spectrum in an external MS data file.
 
 
 [[notational-conventions]]
@@ -94,18 +94,16 @@ The key words “MUST,” “MUST NOT,” “REQUIRED,” “SHALL,” “SHALL 
 [[relationship-to-other-specifications]]
 == Relationship to Other Specifications
 
-IMPORTANT: TODO Relation to ISA-TAB, Andy Jones
-
 The specification described in this document has not been developed in isolation; indeed, it is designed to be complementary to, and thus used in conjunction with, several existing and emerging models. Related specifications include the following:
 
 1.  _mzML_ (http://www.psidev.info/mzml). mzML is the PSI standard for capturing mass spectra / peak lists resulting from mass spectrometry in proteomics <<martens-2011, (Martens _et al._ 2011)>>. mzTab files MAY be used in conjunction with mzML, although it will be possible to use mzTab with other formats of mass spectra. This document does not assume familiarity with mzML.
-2.  __ISA-TAB (__http://isa-tools.org/_)._ The ISA framework allows for reporting experimental metadata and study designs in considerable detail, and is already used for describing metabolomics experiments. It is expected that mzTab files may be linked to ISA-TAB formatted files, for cases where a rich experimental design is to be captured.
+2.  __ISA-TAB (__http://isa-tools.org/_)._ The ISA framework allows for reporting experimental metadata and study designs in considerable detail, and is already used for describing metabolomics experiments. It is expected that mzTab files may be linked to ISA-TAB formatted files, for cases where a rich experimental design is to be captured. The linkage between mzTab-M and ISA-TAB is further exemplified in section <<referencing-external-resources>>.
 
 [[relationship-to-mztab-1.0]]
 === Relationship to mzTab 1.0
 
-IMPORTANT: TODO
-#Insert text in here describing how this relates to mzTab 1.0#
+The first stable version of mzTab (version 1.0) was developed primarily by the PSI as a format for the final results (identification or quantification) of a proteomics experiment, using MS. In mzTab version 1.0 limited support was included for metabolomics, through a small molecule table, in which end results could be encoded at the level of quantified metabolites. The intention of mzTab-M is to extend these concepts, so that more detail can be captured about the evidence trail for quantification, including MS features (different charge states or adducts) and the evidence trail for identifications - both of which could not be easily supported in mzTab v 1.0. mzTab-M is not formally backwards compatible, but follows a similar design pattern. Design decisions made in mzTab-M may in the future be adopted for a version of mzTab specifically intended for proteomics only, but at the time of writing mzTab version 1.0 remains in active use for proteomics, but is deprecated for use in metabolomics.
+
 
 [[the-psi-mass-spectrometry-controlled-vocabulary-cv]]
 === The PSI Mass Spectrometry Controlled Vocabulary (CV)
@@ -116,14 +114,13 @@ As recommended by the PSI CV guidelines, psi-ms.obo should be dynamically mainta
 
 The following ontologies or controlled vocabularies specified below may also be suitable or required in certain instances:
 
-* Unit Ontology (http://www.obofoundry.org/cgi-bin/detail.cgi?id=unit)
-* ChEBI (http://www.ebi.ac.uk/chebi/)
-* OBI (Ontology of Biological Investigations - http://obi.sourceforge.net/)
-* Unimod modifications database - http://www.unimod.org/obo/unimod.obo
-* PRIDE Controlled Vocabulary (http://ebi-pride.googlecode.com/svn/trunk/pride-core/schema/pride_cv.obo)
+* Unit Ontology (http://www.obofoundry.org/ontology/uo.html)
+* ChEBI (ftp://ftp.ebi.ac.uk/pub/databases/chebi/ontology/chebi.obo)
+* OBI Ontology of Biological Investigations (http://obi-ontology.org/)
+* PRIDE Controlled Vocabulary (https://www.ebi.ac.uk/ols/ontologies/pride)
 * NEWT UniProt Taxonomy Database (http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=NEWT)
 * BRENDA tissue/ enzyme source (http://www.brenda-enzymes.info/ontology/tissue/tree/update/update_files/BrendaTissueOBO).
-* Cell Type ontology (http://obo.cvs.sourceforge.net/obo/obo/ontology/anatomy/cell_type/cell.obo).
+* Cell Type ontology (https://raw.githubusercontent.com/obophenotype/cell-ontology/master/cl-basic.obo).
 
 [[resolved-design-and-scope-issues]]
 == Resolved Design and scope issues
@@ -180,7 +177,7 @@ MTD ms_run[1]-id_format [MS, MS:1001530, mzML unique identifier, ]
 
 ...
 
-PSH ... spectra_ref ...
+SEH ... spectra_ref ...
 
 SME ... ms_run[1]:scan=11665 ...
 ----
@@ -193,7 +190,7 @@ Modeling the correct reporting of technical/biological replicates within experim
 * _study_variable_ – The variables about which the final results of a study are reported, which may have been derived following averaging across a group of replicate measurements (assays). The same concept has been defined by others as “experimental factor”.
 * _ms_run_ – An MS run is effectively one run on an MS instrument, and is referenced from assay in different contexts. In the case of pre-fractionation into _n_ fractions, an assay SHOULD reference _n_ ms_runs.
 * _assay_ – The application of a measurement about the sample (in this case through MS) – producing values about small molecules or lipids. One assay is typically mapped to one MS run in the case of label-free MS analysis (with no pre-fractionation) or multiple assays are mapped to one MS run for multiplexed techniques, along with a description of the label or tag applied.
-* _Sample_ – a biological material that has been analyzed, to which descriptors of species, cell/tissue type etc. can be attached. In all of types of mzTab file, these MAY be reported in the metadata section as sample[1-n]-description. Samples are NOT MANDATORY in mzTab, since many software packages cannot determine what type of sample was analyzed (e.g. whether biological or technical replication was performed), although some consumers of mzTab files MAY wish to enforce that samples MUST be provided e.g. to perform statistical analysis.
+* _sample_ – a biological material that has been analyzed, to which descriptors of species, cell/tissue type etc. can be attached. In all of types of mzTab file, these MAY be reported in the metadata section as sample[1-n]-description. Samples are NOT MANDATORY in mzTab, since many software packages cannot determine what type of sample was analyzed (e.g. whether biological or technical replication was performed), although some consumers of mzTab files MAY wish to enforce that samples MUST be provided e.g. to perform statistical analysis.
 
 Clear definitions of biological and technical replicates are difficult to provide as these are somewhat dependent upon the biological domain. However, we use the following general definitions in mzTab.
 
@@ -219,13 +216,14 @@ IMPORTANT: TODO
 [[encoding-missing-values-zeroes-nulls-infinity-and-calculation-errors]]
 === Encoding missing values, zeroes, nulls, infinity and calculation errors
 
-In the table-based sections there MUST NOT be any empty cells. In case a given property is not available “null” MUST be used, but this is only allowed for cells in which isNullable= “true”. If ratios are included and the denominator is zero, the “INF” value MUST be used. If the result leads to calculation errors (for example 0/0), this MUST be reported as “NaN” (for Not a Number). In some cases, there is ambiguity with respect to these cases: e.g. if there are alignment issues and it is unclear whether a molecule has been quantified with zero abundance or the feature was potentially present in the data but was not found.
+In the table-based sections there MUST NOT be any empty cells. In case a given property is not available “null” MUST be used, but this is only allowed for cells in which isNullable= “true”.
 
-[[encoding-numerical-data-with-a-standard-encoding]]
-=== Encoding numerical data with a standard encoding
+For numerical values, they MUST be encoded following the specifications of https://www.w3.org/TR/xmlschema-2/#decimal[xs:decimal]. This does not natively support NaN, INF, scientific notation or null. As such, it is allowed in mzTab to include "NaN" for incalculable numbers and "null" for no data. In some cases, there is ambiguity with respect to the use of "0" versus "null": e.g. if there are alignment issues and it is unclear whether a molecule has been quantified with zero abundance or the feature was potentially present in the data but was not found. Export software would be expected to make a decision on this cases, based on best understanding of the case in hand.
 
-IMPORTANT: TODO
-#Insert some text in here about standard numerical encoding, e.g. US default style “x.x”, i.e. using a period for decimal separation and no commas to separate thousands. Joel is investigating#
+Scientific notation and infinity is explicitly not supported.
+
+
+
 
 [[reliability-score]]
 === Reliability score
@@ -235,8 +233,7 @@ All small molecule identifications reported in an mzTab file MAY be assigned a r
 [[support-for-positive-and-negative-modes]]
 === Support for positive and negative modes
 
-IMPORTANT: TODO
-#Ideal encoding is to put these into separate mzTab files - Andy to add this section#
+It is common in metabolomics workflows to use both positive and negative ionisation modes to increase coverage of molecules quantified. In general, an mzTab-M file is intended to capture a data set generated from assays have been aligned (e.g. in the retention time dimension) to produce a coherent data matrix with few missing values. To our knowledge, it is not common to compare directly the results from positive and negative modes in the same data matrix. As such, we anticipate that such results (i.e. positive mode and negative mode) should be encoded in two different mzTab-M files.
 
 [[referencing-evidence-for-small-molecule-identifications]]
 === Referencing evidence for small molecule identifications
@@ -283,7 +280,7 @@ PRT P12345 … 0.658
 === Referencing external resources
 
 IMPORTANT: TODO
-#Text in here?#
+#Text in here? e.g. ISA-TAB, to consider if we need to have discussion about referencing anything else?#
 
 [[other-supporting-materials]]
 === Other supporting materials
@@ -355,15 +352,10 @@ MTD study_variable[1]-description Group B (spike-in 0.74 fmol/uL)
 [[sections]]
 === Sections
 
-IMPORTANT: TODO Adapt for mzTab-M
-
-#mzTab files can contain five different sections. The MANDATORY metadata section is made up of key-value pairs. The other four sections are OPTIONAL: protein, peptide, PSM and small molecule section are table-based.#
-
-#Every section in an mzTab file MUST only occur once if present. If the PSM, Peptide and Protein Sections are present, the information MUST be consistent between these sections. Field names with indices in square brackets MUST be numbered sequentially and non-decreasing (starting at the first value indicated in the bracket; single integer steps).#
+mzTab-M files MUST have one Metadata (MTD) section and one Small Molecule (SML) Section. In practice, we expect that most files SHOULD also include one Small Molecule Feature (SMF) section, and one Small Molecule Evidence (SME) Section. Files lacking SMF and SME sections can only present summary data about quantified molecules, without any evidence trail for how those values were derived. It will be left to reading software to determine whether additional validation will be requested such that SMF and SME tables MUST be present.
 
 [[metadata-section]]
 === Metadata Section
-IMPORTANT: TODO Split this section into “Core”, then “Proteomics”, then “Metabolomics” – depending on decision of how to proceed with joint development, Andy Jones
 
 The metadata section provides additional information about the dataset(s) reported in the mzTab file. All fields in the metadata section are optional apart from those noted as mandatory. The fields in the metadata section should be reported in order of the various fields listed here. The field’s name and value MUST be separated by a tab character:
 
@@ -391,10 +383,10 @@ In the following list of fields any term encapsulated by `\{}` is meant as a var
 
 [cols=",",]
 |=========================================
-|*Description:* |The ID of the mzTab file.
+|*Description:* |The ID of the mzTab file, this could be supplied by the repository from which it is downloaded or a local identifier from the lab producing the file. It is not intended to be a globally unique ID but carry some locally useful meaning.
 |*Type:* |String
 |*Mandatory* |True
-|*Example:* a|`MTD mzTab-ID PRIDE_1234`
+|*Example:* a|`MTD mzTab-ID MTBL1234`
 |=========================================
 
 [[title]]
@@ -793,9 +785,9 @@ Provisionally decided to support pre-fractionation by allowing. Andy Jones
 |*Mandatory* |True
 |*Example:* a|
 ....
-MTD ms_run_location[1] file://C:\path\to\my\file
+MTD ms_run[1]-location file://C:\path\to\my\file
 …
-MTD ms_run_location[2] ftp://ftp.ebi.ac.uk/path/to/file
+MTD ms_run[1]-location ftp://ftp.ebi.ac.uk/path/to/file
 ....
 |=====================================================================================================================================================================================================================================================================================================================================================
 
@@ -894,22 +886,6 @@ MTD ms_run[1]-hash de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3
 MTD custom[1] [,,MS operator, Florian]
 ....
 |===========================================================================
-
-[[sample1-n]]
-==== sample[1-n]
-
-[cols=",",]
-|=========================================================================================================================================================================================================================================================================
-|*Description:* |A name for each biological sample, to serve as a list of the samples to be referenced elsewhere in the file. Samples are not mandatory in mzTab files, since the biological origin of analysed samples may often not be known to quantification software.
-|*Type:* |String
-|*Mandatory* |False
-|*Example:* a|
-[subs="verbatim,quotes"]
-....
-#MTD sample[1]-custom[1] [,,Extraction date, 2011-12-21]#
-#MTD sample[1]-custom[2] [,,Extraction reason, liver biopsy]#
-....
-|=========================================================================================================================================================================================================================================================================
 
 [[sample1-n-species1-n]]
 ==== sample[1-n]-species[1-n]
@@ -1079,7 +1055,7 @@ MTD cv[1]-url http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/co
 |*Example:* a|
 ....
 MTD database[1] [MIRIAM,MIR:00100079 , “HMDB”, ]
-MTD database[2] [, , “No database”, ]
+MTD database[2] [, , “no database”, "null"]
 MTD database[3] [MIRIAM,MIR:00000002 , “CHEBI”, ]
 ....
 |===========================================================================================================================================================================================================================
@@ -1089,13 +1065,13 @@ MTD database[3] [MIRIAM,MIR:00000002 , “CHEBI”, ]
 IMPORTANT: TODO Make sure to explain that the colon must followed these prefixes in the SMF section below. Andy Jones
 [cols=",",]
 |====================================================================================================================================================
-|*Description:* |The prefix used in the “identifier” column of data tables. This MUST be used even for the “no database” case e.g. using prefix “nd”.
+|*Description:* |The prefix used in the “identifier” column of data tables. For the “no database” case "null" must be used.
 |*Type:* |String
 |*Mandatory* |True
 |*Example:* a|
 ....
 MTD database[1]-prefix hmdb
-MTD database[2]-prefix nd
+MTD database[2]-prefix null
 ....
 |====================================================================================================================================================
 
@@ -1254,7 +1230,7 @@ This field MUST NOT be used to define a unit for quantification columns. The uni
 |*Example:* a|
 [subs="verbatim,quotes"]
 ....
-#MTD colunit-small_molecule retention_time=[UO,UO:0000031, minute,]#
+#Example needed#
 ....
 |===========================================================================================================================================================================
 
@@ -1318,7 +1294,7 @@ A null value MAY be provided if the identification is sufficiently ambiguous as 
 |*Example:* a|
 [subs="verbatim,quotes"]
 ....
-SMH SML_ID identifier …
+SMH SML_ID database_identifier …
 SML 1 #CID:00027395# …
 SML 2 HMDB:HMDB12345 …
 ....
@@ -1361,13 +1337,12 @@ SML 1 … C17H20N4O2 C1=CC=C(C=C1)CCNC(=O)CCNNC(=O)C2=CC=NC=C2 …
 |=====================================================================================================================================================================================================================================================================================================================================================================================================
 
 [[inchi]]
-==== #inchi#
-IMPORTANT: TODO Inchi throughout not inchi_key to check. Andy Jones
+==== inchi
 
 [cols=",",]
 |======================================================================================================================================================================================================================================================================================================================================================
 |*Description:* |
-A list of “\|” separated potential standard IUPAC International Chemical Identifier (InChI) Keys of the given substance.
+A list of “\|” separated potential standard IUPAC International Chemical Identifier (InChI) of the given substance.
 
 The number of values provided MUST match the number of entities reported under “database_identifier”, even if this leads to redundant information being reported (i.e. if ambiguity can be resolved in the InChi), and the validation software will throw an error if the number of “\|” symbols does not match. “null” values between bars are allowed.
 
@@ -1435,18 +1410,18 @@ SML 1 … 1234.5 …
 
 [cols=",",]
 |========================================================================================================================================================================================================================================================================================================================================================================
-|*Description:* |The __exp__erimental mass to charge of the small molecule’s primary adduct form (e.g. mean m/z across assays), assumed by default to be the protonated (positive mode) or de-protonated (negative mode), otherwise the first reported adduct under the adduct ions column. For GC-MS approaches, this MAY be the m/z of the ion used for quantification.
+|*Description:* |The __exp__erimental mass to charge of the small molecule’s primary adduct form (e.g., mean m/z across assays), assumed by default to be the protonated (positive mode) or de-protonated (negative mode), otherwise the first reported adduct under the adduct_ions column. For GC-MS approaches, this MAY be the m/z of the ion used for quantification.
 |*Type:* |Double
 |*Is Nullable:* |*FALSE*
 |*Example:* a|
 ....
 SMH SML_ID … exp_mass_to_charge …
-SME 1 … 348.65 …
+SML 1 … 348.65 …
 ....
 |========================================================================================================================================================================================================================================================================================================================================================================
 
-[[retention_time]]
-==== retention_time
+[[retention_time_in_seconds]]
+==== retention_time_in_seconds
 IMPORTANT: TODO Possible addition to Metadata section to describe how RT values are reported in this section. Andy Jones
 [cols=",",]
 |==================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -1455,7 +1430,7 @@ IMPORTANT: TODO Possible addition to Metadata section to describe how RT values 
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH SML_ID … retention_time …
+SMH SML_ID … retention_time_in_seconds …
 SML 1 … 638 …
 ....
 |==================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -1465,12 +1440,12 @@ SML 1 … 638 …
 IMPORTANT: TODO Joel to insert a regex here. Andy Jones
 [cols=",",]
 |============================================================================================================================================================================================================================================================================================================================================================
-|*Description:* |#A “\|” separated list of adducts# for this this molecule, following the general style in the 2013 IUPAC recommendations on http://dx.doi.org/10.1351/PAC-REC-06-04-06[terms relating to MS] e.g. [M+H]+, [M+Na]+, [M+Nils Hoffmann4]+, [M-H]-, [M+Cl]-. If the adduct classification is ambiguous with regards to identification evidence it MAY be null.
+|*Description:* |#A “\|” separated list of adducts# for this this molecule, following the general style in the 2013 IUPAC recommendations on http://dx.doi.org/10.1351/PAC-REC-06-04-06[terms relating to MS] e.g. [M+H]+, [M+Na]+, [M+NH4]+, [M-H]-, [M+Cl]-. If the adduct classification is ambiguous with regards to identification evidence it MAY be null.
 |*Type:* |#String List#
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH SML_ID … adduct ions …
+SMH SML_ID … adduct_ions …
 SML 1 … [M+H]1+ | [M+Na]1+ …
 ....
 |============================================================================================================================================================================================================================================================================================================================================================
@@ -1542,7 +1517,7 @@ SML 1 … 0.7 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH SML_ID … smallmolecule_abundance_assay[1] …
+SMH SML_ID … abundance_assay[1] …
 SML 1 … 0.3 …
 ....
 |=====================================================================================================================================================================
@@ -1557,7 +1532,7 @@ SML 1 … 0.3 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH SML_ID … smallmolecule_abundance_study_variable[1] …
+SMH SML_ID … abundance_study_variable[1] …
 SML 1 … 0.3 …
 ....
 |============================================================================================================================================================================================================================================================================
@@ -1572,7 +1547,7 @@ SML 1 … 0.3 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH SML_ID … smallmolecule_abundance_study_variable[1] smallmolecule_abundance_ coeffvar_study_variable[1]…
+SMH SML_ID … abundance_study_variable[1] abundance_coeffvar_study_variable[1]…
 SML 1 … 0.3 0.04 …
 ....
 |=========================================================================================================================
@@ -1649,7 +1624,7 @@ SMF 1 5|6|12…
 |==============================================================================================================================================================================================================================================================================================================================================================================
 
 [[sme_id_ref_ambiguity_code]]
-==== SME_ID_REF_Ambiguity_code
+==== SME_ID_REF_ambiguity_code
 
 [cols=",",]
 |=================================================================================================================================================================================================================================================================================================================================================================
@@ -1658,7 +1633,7 @@ SMF 1 5|6|12…
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SFH SMF_ID SME_ID_REFS SME_ID_REF_Ambiguity_code
+SFH SMF_ID SME_ID_REFS SME_ID_REF_ambiguity_code
 SMF 1 5|6|12… 1
 ....
 |=================================================================================================================================================================================================================================================================================================================================================================
@@ -1669,7 +1644,7 @@ IMPORTANT: TODO Add URL to these recommendations? Andy Jones
 IMPORTANT: TODO Joel to write a regex for this. Andy Jones
 [cols=",",]
 |==========================================================================================================================================================================================================
-|*Description:* |#The assumed adduct classification of this molecule, following the general style in the 2013 IUPAC recommendations on terms relating to MS e.g. [M+H]+, [M+Na]+, [M+Nils Hoffmann4]+, [M-H]-, [M+Cl]-.#
+|*Description:* |#The assumed adduct classification of this molecule, following the general style in the 2013 IUPAC recommendations on terms relating to MS e.g. [M+H]+, [M+Na]+, [M+NH4]+, [M-H]-, [M+Cl]-.#
 |*Type:* |#String#
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
@@ -1724,8 +1699,8 @@ SMF 1 … 1 …
 ....
 |===========================================
 
-[[retention_time-1]]
-==== retention_time
+[[retention_time_in_seconds-1]]
+==== retention_time_in_seconds
 
 [cols=",",]
 |====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -1734,13 +1709,13 @@ SMF 1 … 1 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SFH SMF_ID … retention_time …
-SMF 1 … 1345 …
+SFH SMF_ID … retention_time_in_seconds …
+SMF 1 … 1345.7 …
 ....
 |====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-[[retention_time_start]]
-==== retention_time_start
+[[retention_time_in_seconds_start]]
+==== retention_time_in_seconds_start
 
 [cols=",",]
 |========================================================================================================================================================================================================================================================================================================================================================
@@ -1749,13 +1724,13 @@ SMF 1 … 1345 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SFH SMF_ID … retention_time_start …
-SMF 1 … 1327 …
+SFH SMF_ID … retention_time_in_seconds_start …
+SMF 1 … 1327.0 …
 ....
 |========================================================================================================================================================================================================================================================================================================================================================
 
-[[retention_time_end]]
-==== retention_time_end
+[[retention_time_in_seconds_end]]
+==== retention_time_in_seconds_end
 
 [cols=",",]
 |=======================================================================================================================================================================================================================================================================================================================================================
@@ -1764,8 +1739,8 @@ SMF 1 … 1327 …
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SFH SMF_ID … retention_time_start …
-SMF 1 … 1327 …
+SFH SMF_ID … retention_time_in_seconds_end …
+SMF 1 … 1327.8 …
 ....
 |=======================================================================================================================================================================================================================================================================================================================================================
 
@@ -1806,7 +1781,7 @@ SMF 1 … My value some other value
 * Raw quantification values, assuming normalised values are provided in the standard assay quantification columns.
 * Predicted retention time
 * CCS values
-* Two-dimensional retention times e.g. `opt_retention_time1` `opt_retention_time2`
+* Two-dimensional retention times e.g. `opt_retention_time_in_seconds1` `opt_retention_time_in_seconds2`
 
 [[small-molecule-evidence-sme-section]]
 === Small Molecule Evidence (SME) Section
@@ -1834,8 +1809,8 @@ SME 1 …
 ....
 |=======================================================================================
 
-[[evidence_unique_id]]
-==== evidence_unique_id
+[[evidence_unique_ID]]
+==== evidence_unique_ID
 
 [cols=",",]
 |==================================================================================================================================================================================================================================================================
@@ -1964,7 +1939,7 @@ SME 1 … http://www.hmdb.ca/metabolites/HMDB00054
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
 ....
-SMH identifier … derivatized_form …
+SMH database_identifier … derivatized_form …
 SML CID:00027395 … [,, “TMS”,] …
 ....
 |==============================================================================================================================================================================================
@@ -1974,7 +1949,7 @@ SML CID:00027395 … [,, “TMS”,] …
 IMPORTANT: TODO Regex in here. Andy Jones
 [cols=",",]
 |============================================================================================================================================================================================================================================================================================================
-|*Description:* |The assumed adduct classification of this molecule, following the general style in the 2013 IUPAC recommendations on terms relating to MS e.g. [M+H]+, [M+Na]+, [M+Nils Hoffmann4]+, [M-H]-, [M+Cl]-. If the adduct classification is ambiguous with regards to identification evidence it MAY be null.
+|*Description:* |The assumed adduct classification of this molecule, following the general style in the 2013 IUPAC recommendations on terms relating to MS e.g. [M+H]+, [M+Na]+, [M+NH4]+, [M-H]-, [M+Cl]-. If the adduct classification is ambiguous with regards to identification evidence it MAY be null.
 |*Type:* |#String#
 |*Is Nullable:* |*TRUE*
 |*Example:* a|
@@ -2074,7 +2049,7 @@ SME 1 … [MS, MS:1001477, SpectraST,] …
 |*Example:* a|
 ....
 SEH SME_ID … ms_level …
-SME 1 … [MS,MS:100511,”ms level”,2] …
+SME 1 … [MS,MS:1000511,”ms level”,2] …
 ....
 |=====================================================================================================================================================================================================================================================================================================
 
