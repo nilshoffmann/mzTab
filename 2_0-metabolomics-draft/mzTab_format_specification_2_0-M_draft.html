@@ -963,7 +963,7 @@ There is deliberately no attempt to define the boundary of the term “sample”
 <div class="sect2">
 <h3 id="ambiguity_in_identification">5.7. Ambiguity in identification</h3>
 <div class="paragraph">
-<p>It is common in metabolomics and lipidomics for significant ambiguity to remain after data processing in the identification of molecules. In the top level (SML) table, multiple identifiers MAY be provided in several columns: database_identifier, chemical_formula, smiles, inchi, chemical_name and uri. If there is ambiguity in the actual identity of the molecule, multiple identifiers SHOULD be reported separated by the "|" character. The number of elements separated by | characters MUST be identical in all columns where data is reported to make it clear the corrspondence across columns.</p>
+<p>It is common in metabolomics and lipidomics for significant ambiguity to remain after data processing in the identification of molecules. In the top level (SML) table, multiple identifiers MAY be provided in several columns: database_identifier, chemical_formula, smiles, inchi, chemical_name and uri. If there is ambiguity in the actual identity of the molecule, multiple identifiers SHOULD be reported separated by the "|" character. The number of elements separated by | characters MUST be identical in all columns where data is reported to emphasize the correspondence across columns.</p>
 </div>
 <div class="paragraph">
 <p>The SML element <a href="#reliability">Section 6.3.11</a> MUST be assigned a value to indicate the confidence or ambiguity of the overall assignment.</p>
@@ -1034,7 +1034,7 @@ SMF 1 … 24.55</pre>
 <div class="sect2">
 <h3 id="other-supporting-materials">5.13. Other supporting materials</h3>
 <div class="paragraph">
-<p>Example files are located at <a href="https://github.com/HUPO-PSI/mzTab/tree/master/examples/1_1-Metabolomics_Draft">GitHub</a>.
+<p>Example files are located at <a href="https://github.com/HUPO-PSI/mzTab/tree/master/examples/2_0-Metabolomics_Draft">GitHub</a>.
 TODO: Need to tidy up GitHub example file repo.</p>
 </div>
 </div>
@@ -1174,6 +1174,10 @@ To be able to supply metadata specific to each study variable (grouping of assay
 <li>
 <p><strong>URIs</strong><br>
 URIs MUST follow the format defined in <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a> and <a href="https://tools.ietf.org/html/rfc8089">RFC 8089</a> ('file' URIs).</p>
+</li>
+<li>
+<p><strong>Versioning</strong><br>
+To support a future evolution of the format, an mzTab file MUST report its version. From version 2.0.0-M onwards, we intend to use <a href="https://semver.org/">semantic versioning</a>. This means that increasing the last digit of the version (the <em>patch</em> level) indicates backwards compatible fixes to the specification that require no adaptation of consumers or producers of the format. A change in the middle digit of the version (the <em>minor</em> level) indicates new features that are backwards compatible to existing software but will require updates for new producers and consumers to make use of those features. Finally, a change in the first digit of the version (the <em>major</em> level) indicates breaking changes in the format that require changes in any producing or consuming software to support features of that version.</p>
 </li>
 </ul>
 </div>
@@ -4304,7 +4308,7 @@ SME 3 ms_run[1]:mass=278.65;rt=376.5</pre>
 <div class="content">
 <pre>SEH SME_ID identifier …
 SME 1 CID:00027395 …
-SML 2 HMDB:HMDB12345 …</pre>
+SME 2 HMDB:HMDB12345 …</pre>
 </div>
 </div></div></td>
 </tr>
@@ -4986,7 +4990,7 @@ SML 1 … My value some other value</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-11 16:46:13 UTC
+Last updated 2018-06-23 08:44:12 UTC
 </div>
 </div>
 </body>
