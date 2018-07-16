@@ -556,30 +556,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The remainder of this document is structured as follows.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
+<div class="paragraph">
 <p><a href="#use-cases-for-mztab">Chapter 2</a> lists use cases mzTab-M is designed to support.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#notational-conventions">Chapter 3</a> describes the terminology used.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#relationship-to-other-specifications">Chapter 4</a> describes how the specification presented in <a href="#format-specification">Chapter 6</a> relates to other specifications, both those that it extends and those that it is intended to complement.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#resolved-design-and-scope-issues">Chapter 5</a> discusses the reasoning behind several design decisions taken.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#format-specification">Chapter 6</a> contains the documentation of the file.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#non-supported-use-cases">Chapter 7</a> lists use cases that are currently not supported.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p><a href="#conclusions">Chapter 8</a> Conclusions are presented last.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1006,13 +1002,19 @@ There is deliberately no attempt to define the boundary of the term “sample”
 <div class="sect2">
 <h3 id="adding-optional-columns">5.11. Adding optional columns</h3>
 <div class="paragraph">
-<p>Additional columns MAY be added to the end of rows in all the table-based sections.</p>
+<p>Additional columns MAY be added to the end of rows in all the table-based sections. The information stored within an optional column is completely up to the resource that generates the file. It MUST not be assumed that optional columns having the same name in different mzTab files contain the same type of information.</p>
 </div>
 <div class="paragraph">
 <p>These column headers MUST start with the prefix “opt_” followed by the identifier of the object they reference: assay, study variable, MS run or “global” (if the value relates to all replicates). Column names MUST only contain the following characters: ‘A’-‘Z’, ‘a’-‘z’, ‘0’-‘9’, ‘<em>’, ‘-’, ‘[’, ‘]’, and ‘:’. CV parameter accessions MAY be used for optional columns following the format: opt</em>{OBJECT_ID}_cv_{accession}_\{parameter name}. Spaces within the parameter’s name MUST be replaced by ‘_’.</p>
 </div>
-<div class="paragraph">
-<p>The information stored within an optional column is completely up to the resource that generates the file. It MUST not be assumed that optional columns having the same name in different mzTab files contain the same type of information. CV parameter accessions MAY be used as optional column names according to the following convention: opt_{OBJECT_ID}_cv_{accession}_\{parameter name}. Spaces within the parameter’s name MUST be replaced by ‘_’.</p>
+<div class="listingblock">
+<div class="content">
+<pre>COM Example showing a global aligned 2D feature retention time for GCxGC-MS
+
+…
+SFH SMF_ID … opt_global_retention_time_nd
+SMF 1 … 1562 | 2.47</pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1353,7 +1355,7 @@ To support a future evolution of the format, an mzTab file MUST report its versi
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="literalblock">
 <div class="content">
-<pre>MTD sample_processing[1] [SEP, sep:00210, liquid chromatograhy,]</pre>
+<pre>MTD sample_processing[1] [SEP, sep:00210, liquid chromatography,]</pre>
 </div>
 </div></div></td>
 </tr>
@@ -4975,49 +4977,46 @@ SML 1 … My value … some other value</pre>
 <div class="sect1">
 <h2 id="authors">9. Authors</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>TODO: Please add affiliations</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
 <p>Nils Hoffmann, Leibniz-Institut für Analytische Wissenschaften – ISAS – e.V., Dortmund, Germany.</p>
 </li>
 <li>
-<p>Joel Rein</p>
+<p>Joel Rein, Wellcome Sanger Institute, Cambridge, United Kingdom.</p>
 </li>
 <li>
 <p>Kenneth Haug, European Bioinformatics Institute, Cambridge, United Kingdom.</p>
 </li>
 <li>
-<p>Saravanan Dayalan</p>
+<p>Saravanan Dayalan, EMBL-ABR and University of Melbourne, Melbourne, Australia.</p>
 </li>
 <li>
-<p>Philippe Rocca-Serra</p>
+<p>Philippe Rocca-Serra, Oxford e-Research Centre, University of Oxford, United Kingdom.</p>
 </li>
 <li>
-<p>Da Qi, University of Liverpool and BGI</p>
+<p>Da Qi, BGI-Shenzhen, China.</p>
 </li>
 <li>
 <p>Gerhard Mayer, Medizinisches Proteom-Center, Ruhr-Universität Bochum, Germany.</p>
 </li>
 <li>
-<p>Timo Sachsenberg, Applied Bioinformatics Group, Center for Bioinformatics, University of Tübingen, Germany</p>
+<p>Timo Sachsenberg, Applied Bioinformatics Group, Center for Bioinformatics, University of Tübingen, Germany.</p>
 </li>
 <li>
-<p>Oliver Alka, Applied Bioinformatics Group, Center for Bioinformatics, University of Tübingen, Germany</p>
+<p>Oliver Alka, Applied Bioinformatics Group, Center for Bioinformatics, University of Tübingen, Germany.</p>
 </li>
 <li>
 <p>Juan Antonio Vizcaíno, European Bioinformatics Institute, Cambridge, United Kingdom.</p>
 </li>
 <li>
-<p>Reza M Salek,</p>
+<p>Reza M Salek, International Agency for Research on Cancer, Lyon, France.</p>
 </li>
 <li>
 <p>Steffen Neumann, Leibniz Institute of Plant Biochemistry, Halle, Germany.</p>
 </li>
 <li>
-<p>Andrew R Jones, University of Liverpool</p>
+<p>Andrew R Jones, University of Liverpool, United Kingdom.</p>
 </li>
 </ul>
 </div>
@@ -5083,7 +5082,7 @@ SML 1 … My value … some other value</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-07-13 08:00:38 UTC
+Last updated 2018-07-16 14:59:50 UTC
 </div>
 </div>
 </body>
